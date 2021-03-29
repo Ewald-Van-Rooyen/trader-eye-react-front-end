@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+
 import './App.css';
+import Login from './components/login/Login';
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [showLogin, setShowLogin] = useState(true);
+    const [showDashboard, setShowDashboard] = useState(false);
+
+    const showLoginClickCallback = ()=>{
+        setShowLogin(true);
+        setShowDashboard(false);
+    };
+
+    const showDashboardClackCallback = ()=>{
+        setShowDashboard(true);
+        setShowLogin(false);
+    };
+
+    return (
+        <>
+            {showLogin && <Login clickCallback={showDashboardClackCallback}/> }
+            {showDashboard && <Dashboard clickCallback={showLoginClickCallback}/>}
+        </>
+    );
 }
 
 export default App;
